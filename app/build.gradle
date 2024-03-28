@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
     id "org.jetbrains.kotlin.kapt" version "1.9.0"
 }
 
@@ -107,5 +108,10 @@ dependencies {
     implementation "androidx.room:room-ktx:2.6.1"
     kapt "androidx.room:room-compiler:2.6.1"
 
+    // Extended Icons
+    implementation "androidx.compose.material:material-icons-extended:1.6.4"
+
+    // System UI Controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.0"
 
 }

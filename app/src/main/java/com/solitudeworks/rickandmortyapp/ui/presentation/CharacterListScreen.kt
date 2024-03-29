@@ -2,8 +2,10 @@ package com.solitudeworks.rickandmortyapp.ui.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -51,12 +54,42 @@ fun CharacterListScreen(
                         .align(Alignment.CenterHorizontally)
                 )
                 SearchBar(
-                    hint = "Search...",
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                 ) {
 
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(
+                    onClick = { /* Lógica do primeiro botão */ },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp)
+                ) {
+                    Text("Alive")
+                }
+                Button(
+                    onClick = { /* Lógica do segundo botão */ },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                ) {
+                    Text("Dead")
+                }
+                Button(
+                    onClick = { /* Lógica do terceiro botão */ },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp)
+                ) {
+                    Text("Unknown")
                 }
             }
         }
@@ -67,14 +100,10 @@ fun CharacterListScreen(
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    hint: String = "",
     onSearch: (String) -> Unit = {}
 ) {
     var text by remember {
         mutableStateOf("")
-    }
-    var isHintDisplayed by remember {
-        mutableStateOf(hint != "")
     }
 
     Box(modifier = modifier) {
@@ -92,16 +121,6 @@ fun SearchBar(
                 .shadow(8.dp, RoundedCornerShape(10.dp))
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .padding(horizontal = 20.dp, vertical = 12.dp)
-                .onFocusChanged {
-                    isHintDisplayed = it.hasFocus && text.isEmpty()
-                }
         )
-        if (isHintDisplayed) {
-            Text(
-                text = hint,
-                color = Color.DarkGray,
-                modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
-            )
-        }
     }
 }

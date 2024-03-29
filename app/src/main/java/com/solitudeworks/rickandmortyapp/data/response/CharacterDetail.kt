@@ -1,9 +1,9 @@
-package com.solitudeworks.rickandmortyapp.data.model
+package com.solitudeworks.rickandmortyapp.data.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class CharacterDetail(
     @SerializedName("created")
     val created: String?,
     @SerializedName("episode")

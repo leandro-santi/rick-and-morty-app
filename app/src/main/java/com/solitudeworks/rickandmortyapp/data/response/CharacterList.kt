@@ -1,11 +1,11 @@
-package com.solitudeworks.rickandmortyapp.data.model
+package com.solitudeworks.rickandmortyapp.data.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Character(
+data class CharacterList(
     @SerializedName("info")
     val info: Info?,
     @SerializedName("results")
-    val results: List<Result>?
+    val results: List<CharacterDetail>?
 )

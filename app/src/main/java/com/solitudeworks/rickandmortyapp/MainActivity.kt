@@ -3,54 +3,49 @@ package com.solitudeworks.rickandmortyapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavType
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterListScreen
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
+import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             RickAndMortyAppTheme {
 
-                val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = "character_list_screen"
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
-                    composable("character_list_screen") {
-                        CharacterListScreen(navController = navController)
-                    }
-                    composable(
-                        "character_detail_screen/{dominantColor}/{characterId}",
-                        arguments = listOf(
-                            navArgument("dominantColor") {
-                                type = NavType.IntType
-                            },
-                            navArgument("characterId") {
-                                type = NavType.StringType
-                            }
-                        )
-                    ) {
-                        val dominantColor = remember {
-                            val color = it.arguments?.getInt("dominantColor")
-                            color?.let { Color(it) } ?: Color.White
-                        }
-                        val characterId = remember {
-                            it.arguments?.getString("characterId")
-                        }
-
-                    }
+                    RickAndMortyApp()
                 }
 
             }
@@ -59,17 +54,110 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
+fun RickAndMortyApp(
+    navController: NavHostController = rememberNavController()
+) {
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val characterName = backStackEntry?.arguments?.getString("characterName", null)
+    val currentScreenName = characterName ?: stringResource(
+        RickAndMortyScreen.valueOf(
+            backStackEntry?.destination?.route ?: RickAndMortyScreen.CharacterList.name
+        ).title
     )
+    Scaffold(
+        topBar = {
+            RickAndMortyAppBar(
+                currentScreenName,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = { navController.navigateUp() }
+            )
+        }
+    ) { innerPadding ->
+        innerPadding.calculateTopPadding()
+        NavHost(
+            navController = navController,
+            startDestination = RickAndMortyScreen.CharacterList.name
+        ) {
+            composable(route = RickAndMortyScreen.CharacterList.name) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+                    // CharacterList(navController)
+                    Button(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp),
+                        onClick = {
+                            navController.navigate(
+                                RickAndMortyScreen.LocationList.name
+                            )
+                        }) {
+                        Text(text = stringResource(id = R.string.text_locations))
+                    }
+                }
+            }
+            composable(route = RickAndMortyScreen.LocationList.name) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+                    // LocationList()
+                    Button(
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp),
+                        onClick = {
+                            navController.navigate(
+                                RickAndMortyScreen.CharacterList.name
+                            )
+                        }) {
+                        Text(text = stringResource(id = R.string.text_characters))
+                    }
+                }
+            }
+            composable(route = RickAndMortyScreen.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
+                val characterId =
+                    navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+                    characterId?.let {
+                        // SingleCharacter(characterId)
+                    }
+                }
+            }
+        }
+    }
 }
 
-@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GreetingPreview() {
-    RickAndMortyAppTheme {
-        Greeting("Android")
-    }
+fun RickAndMortyAppBar(
+    currentScreenTitle: String,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    TopAppBar(
+        title = { Text(currentScreenTitle) },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBackIosNew,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
+                }
+            }
+        }
+    )
 }

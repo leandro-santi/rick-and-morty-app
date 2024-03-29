@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">RickAndMortyApp</string>
+    <string name="first_page">1</string>
+    <string name="text_error">Error</string>
+    <string name="text_exit">Close application</string>
+    <string name="text_retry">Retry</string>
+    <string name="text_last_known_location">Last known location</string>
+    <string name="text_unknown">Unknown</string>
+    <string name="back_button">back</string>
+    <string name="text_locations">Locations</string>
+    <string name="text_characters">Characters</string>
+    <string name="text_character_list">Characters</string>
+    <string name="text_location_list">Locations</string>
+    <string name="text_character">Character</string>
+    <string name="text_status">Live Status:</string>
+    <string name="text_species_and_gender">Species and Gender</string>
+    <string name="text_first_seen">First seen in:\n</string>
+    <string name="text_episodes">Episodes:</string>
+    <string name="text_loading">Loading...</string>
 </resources>

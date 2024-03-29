@@ -7,10 +7,10 @@
     <string name="text_last_known_location">Last known location</string>
     <string name="text_unknown">Unknown</string>
     <string name="back_button">back</string>
-    <string name="text_locations">Locations</string>
+    <string name="text_search">Search</string>
     <string name="text_characters">Characters</string>
     <string name="text_character_list">Characters</string>
-    <string name="text_location_list">Locations</string>
+    <string name="text_search_list">Search</string>
     <string name="text_character">Character</string>
     <string name="text_status">Live Status:</string>
     <string name="text_species_and_gender">Species and Gender</string>

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,7 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
-import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreen
+import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -60,8 +59,8 @@ fun RickAndMortyApp(
     val backStackEntry by navController.currentBackStackEntryAsState()
     val characterName = backStackEntry?.arguments?.getString("characterName", null)
     val currentScreenName = characterName ?: stringResource(
-        RickAndMortyScreen.valueOf(
-            backStackEntry?.destination?.route ?: RickAndMortyScreen.CharacterList.name
+        RickAndMortyScreenTitles.valueOf(
+            backStackEntry?.destination?.route ?: RickAndMortyScreenTitles.CharacterList.name
         ).title
     )
     Scaffold(
@@ -76,49 +75,42 @@ fun RickAndMortyApp(
         innerPadding.calculateTopPadding()
         NavHost(
             navController = navController,
-            startDestination = RickAndMortyScreen.CharacterList.name
+            startDestination = RickAndMortyScreenTitles.CharacterList.name
         ) {
-            composable(route = RickAndMortyScreen.CharacterList.name) {
+            composable(route = RickAndMortyScreenTitles.CharacterList.name) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
                 ) {
+
                     // CharacterList(navController)
+
                     Button(
                         modifier = Modifier
-                            .align(Alignment.BottomEnd)
+                            .align(Alignment.BottomCenter)
                             .padding(8.dp),
                         onClick = {
                             navController.navigate(
-                                RickAndMortyScreen.LocationList.name
+                                RickAndMortyScreenTitles.SearchList.name
                             )
                         }) {
-                        Text(text = stringResource(id = R.string.text_locations))
+                        Text(text = stringResource(id = R.string.text_search))
                     }
                 }
             }
-            composable(route = RickAndMortyScreen.LocationList.name) {
+            composable(route = RickAndMortyScreenTitles.SearchList.name) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
                 ) {
+
                     // LocationList()
-                    Button(
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(8.dp),
-                        onClick = {
-                            navController.navigate(
-                                RickAndMortyScreen.CharacterList.name
-                            )
-                        }) {
-                        Text(text = stringResource(id = R.string.text_characters))
-                    }
+
                 }
             }
-            composable(route = RickAndMortyScreen.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
+            composable(route = RickAndMortyScreenTitles.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
                 val characterId =
                     navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
                 Box(
@@ -127,7 +119,9 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
                     characterId?.let {
+
                         // SingleCharacter(characterId)
+
                     }
                 }
             }

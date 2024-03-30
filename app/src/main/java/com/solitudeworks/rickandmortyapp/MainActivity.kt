@@ -29,7 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterItemPreview
+import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +45,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     RickAndMortyApp()
+
                 }
 
             }
@@ -85,8 +87,7 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
 
-                    // CharacterList(navController)
-                    CharacterItemPreview()
+                    CharacterList(navController)
 
                     Button(
                         modifier = Modifier
@@ -157,3 +158,4 @@ fun RickAndMortyAppBar(
         }
     )
 }
+

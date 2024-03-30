@@ -12,8 +12,7 @@ class CharactersRepository @Inject constructor() {
         return RetrofitInstance.CharacterApi.getPagedCharactersList(page)
     }
 
-    // https://rickandmortyapi.com/api/character/?name=rick&status=alive
-    suspend fun getSearchCharacterList(
+    suspend fun getSearchCharacterList( // https://rickandmortyapi.com/api/character/?name=rick&status=alive
         page: Int,
         name: String,
         status: String

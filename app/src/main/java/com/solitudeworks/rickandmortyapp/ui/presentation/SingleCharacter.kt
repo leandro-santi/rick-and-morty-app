@@ -78,6 +78,7 @@ fun SingleCharacter(characterId: Int) {
             color = Color.Gray,
             modifier = Modifier.padding(top = 8.dp)
         )
+
         Row(
             modifier = Modifier
                 .padding(start = 16.dp),

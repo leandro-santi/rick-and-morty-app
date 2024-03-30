@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
@@ -40,6 +39,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterList(navController: NavHostController) {
+
     val charactersViewModel = hiltViewModel<CharacterListViewModel>()
     val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.getPagedCharacterList
     val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
@@ -80,12 +80,11 @@ fun CharacterList(navController: NavHostController) {
             }
         }
     }
+
 }
 
 @Composable
 fun CharacterItem(character: CharacterDetail, navController: NavHostController) {
-
-    val context = LocalContext.current
 
     Row(
         modifier = Modifier
@@ -146,61 +145,4 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
 
     }
 
-}
-
-@Composable
-fun CharacterItemPreview() {
-    Column {
-        CharacterItem(
-            character = CharacterDetail(
-                null,
-                null,
-                null,
-                1,
-                "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                null,
-                "Rick",
-                null,
-                "Human",
-                null,
-                null,
-                null
-            ), rememberNavController()
-        )
-
-        CharacterItem(
-            character = CharacterDetail(
-                null,
-                null,
-                null,
-                1,
-                "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                null,
-                "Rick",
-                null,
-                "Human",
-                null,
-                null,
-                null
-            ), rememberNavController()
-        )
-
-        CharacterItem(
-            character = CharacterDetail(
-                null,
-                null,
-                null,
-                1,
-                "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                null,
-                "Rick",
-                null,
-                "Human",
-                null,
-                null,
-                null
-            ), rememberNavController()
-        )
-
-    }
 }

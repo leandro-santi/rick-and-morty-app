@@ -10,8 +10,6 @@ import com.solitudeworks.rickandmortyapp.data.domain.CharacterSearchListPagingSo
 import com.solitudeworks.rickandmortyapp.data.domain.GetPagedSearchCharactersUseCase
 import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -21,7 +19,10 @@ class CharacterSearchViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    fun getPagedSearchCharacterList(name: String, filter: String): Flow<PagingData<CharacterDetail>> {
+    fun getPagedSearchCharacterList(
+        name: String,
+        filter: String
+    ): Flow<PagingData<CharacterDetail>> {
         return Pager(
             config = PagingConfig(pageSize = 25),
             initialKey = null,

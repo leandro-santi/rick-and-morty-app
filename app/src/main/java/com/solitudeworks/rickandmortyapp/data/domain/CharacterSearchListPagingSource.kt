@@ -10,8 +10,7 @@ class CharacterSearchListPagingSource(
     private val getPagedSearchCharactersUseCase: GetPagedSearchCharactersUseCase,
     private val name: String,
     private val status: String
-) :
-    PagingSource<Int, CharacterDetail>() {
+) : PagingSource<Int, CharacterDetail>() {
 
     override fun getRefreshKey(state: PagingState<Int, CharacterDetail>): Int =
         RickAndMortyApplication.applicationContext().getString(
@@ -35,4 +34,5 @@ class CharacterSearchListPagingSource(
             }
         )
     }
+
 }

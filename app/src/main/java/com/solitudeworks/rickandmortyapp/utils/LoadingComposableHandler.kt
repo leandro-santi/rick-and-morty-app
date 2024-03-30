@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 fun LoadingView(
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -27,16 +28,19 @@ fun LoadingView(
     ) {
         CircularProgressIndicator()
     }
+
 }
 
 @Composable
 fun LoadingItem() {
+
     CircularProgressIndicator(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
             .wrapContentWidth(Alignment.CenterHorizontally)
     )
+
 }
 
 @Composable
@@ -45,6 +49,7 @@ fun ErrorItem(
     modifier: Modifier = Modifier,
     onClickRetry: () -> Unit
 ) {
+
     Row(
         modifier = modifier.padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -61,4 +66,5 @@ fun ErrorItem(
             Text(text = "Try again")
         }
     }
+
 }

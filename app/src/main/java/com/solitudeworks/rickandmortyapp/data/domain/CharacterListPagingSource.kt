@@ -29,4 +29,5 @@ class CharacterListPagingSource(private val getPagedCharactersUseCase: GetPagedC
             onFailure = { LoadResult.Error(it) }
         )
     }
+
 }

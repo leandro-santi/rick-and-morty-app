@@ -7,6 +7,7 @@ import javax.inject.Inject
 class GetSingleCharactersUseCase @Inject constructor(
     private val charactersListRepository: CharactersRepository
 ) {
+
     suspend fun getSingleCharacter(characterId: Int): CharacterDetail {
         return charactersListRepository.getSingleCharacter(characterId).body() ?: CharacterDetail(
             null,
@@ -23,4 +24,5 @@ class GetSingleCharactersUseCase @Inject constructor(
             null
         )
     }
+
 }

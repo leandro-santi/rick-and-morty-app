@@ -9,7 +9,8 @@ class GetPagedCharactersUseCase @Inject constructor(
 ) {
 
     suspend fun getPagedCharacterList(page: Int): List<CharacterDetail> {
-        return charactersListRepository.getCharacterList(page).body()?.results?: emptyList<CharacterDetail>()
+        return charactersListRepository.getCharacterList(page).body()?.results
+            ?: emptyList<CharacterDetail>()
     }
 
 }

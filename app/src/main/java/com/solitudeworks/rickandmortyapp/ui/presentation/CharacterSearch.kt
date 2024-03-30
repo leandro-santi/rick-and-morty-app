@@ -3,18 +3,15 @@ package com.solitudeworks.rickandmortyapp.ui.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,7 +32,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterSearchScreen(navController: NavHostController) {
-    val selectedFilters = remember { mutableStateListOf<String>() }
+
     var showSearchList by remember { mutableStateOf(false) }
     var name by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
@@ -48,7 +45,7 @@ fun CharacterSearchScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        // name
+        // Name text field
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
@@ -58,7 +55,7 @@ fun CharacterSearchScreen(navController: NavHostController) {
                 .padding(bottom = 16.dp)
         )
 
-        // status
+        // Status text field
         OutlinedTextField(
             value = status,
             onValueChange = { status = it },
@@ -68,22 +65,24 @@ fun CharacterSearchScreen(navController: NavHostController) {
                 .padding(bottom = 16.dp)
         )
 
-
+        // Search button
         Button(
             onClick = { showSearchList = true },
             modifier = Modifier.padding(top = 16.dp, bottom = 32.dp)
         ) {
-            Text(text = "Show Character Search List")
+            Text(text = "Search!")
         }
 
         if (showSearchList) {
             CharacterSearchList(navController, name, status)
         }
     }
+
 }
 
 @Composable
 fun CharacterSearchList(navController: NavHostController, name: String, filter: String) {
+
     val charactersSearchViewModel = hiltViewModel<CharacterSearchViewModel>()
     val characterFlow: Flow<PagingData<CharacterDetail>> =
         charactersSearchViewModel.getPagedSearchCharacterList(name, filter)
@@ -125,4 +124,5 @@ fun CharacterSearchList(navController: NavHostController, name: String, filter: 
             }
         }
     }
+
 }

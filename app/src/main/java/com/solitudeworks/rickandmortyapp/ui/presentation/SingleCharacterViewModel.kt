@@ -16,8 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SingleCharacterViewModel @Inject constructor(
     private val getSingleCharactersUseCase: GetSingleCharactersUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private val _loadingState = MutableStateFlow<LoadingState>(LoadingState.Loading)
     val loadingState = _loadingState.asStateFlow()

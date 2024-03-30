@@ -14,10 +14,11 @@ class RickAndMortyApplication : Application() {
     companion object {
         private var instance: RickAndMortyApplication? = null
 
-        fun applicationContext() : Context {
+        fun applicationContext(): Context {
             return instance!!.applicationContext
         }
     }
+
     override fun onCreate() {
         super.onCreate()
         val context: Context = RickAndMortyApplication.applicationContext()

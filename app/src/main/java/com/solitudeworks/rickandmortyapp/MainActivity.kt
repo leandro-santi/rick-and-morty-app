@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
+import com.solitudeworks.rickandmortyapp.ui.presentation.SingleCharacter
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint
@@ -102,6 +103,23 @@ fun RickAndMortyApp(
                     }
                 }
             }
+
+            composable(route = RickAndMortyScreenTitles.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
+                val characterId =
+                    navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+                    characterId?.let {
+
+                        SingleCharacter(characterId)
+
+                    }
+                }
+            }
+
             composable(route = RickAndMortyScreenTitles.SearchList.name) {
                 Box(
                     modifier = Modifier
@@ -113,21 +131,7 @@ fun RickAndMortyApp(
 
                 }
             }
-            composable(route = RickAndMortyScreenTitles.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
-                val characterId =
-                    navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
-                    characterId?.let {
 
-                        // SingleCharacter(characterId)
-
-                    }
-                }
-            }
         }
     }
 }

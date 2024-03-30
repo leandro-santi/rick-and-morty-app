@@ -127,7 +127,7 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
 
-                    // LocationList()
+                    // Search()
 
                 }
             }

@@ -114,6 +114,7 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
+
             Row(verticalAlignment = Alignment.CenterVertically) {
 
                 // Character's status feedback icon
@@ -139,15 +140,9 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
                 )
             }
 
-            // Character's initial details (Status and Gender)
-            Row(
-                modifier = Modifier.padding(top = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = " ${character.status ?: ""} (Status)")
-            }
+            // Character's details
+            Text(text = "Tap for details")
 
-            Text(text = " ${character.species} (Gender)")
         }
 
     }

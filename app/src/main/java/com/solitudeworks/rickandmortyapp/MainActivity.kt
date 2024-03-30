@@ -29,6 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterItemPreview
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,6 +86,7 @@ fun RickAndMortyApp(
                 ) {
 
                     // CharacterList(navController)
+                    CharacterItemPreview()
 
                     Button(
                         modifier = Modifier

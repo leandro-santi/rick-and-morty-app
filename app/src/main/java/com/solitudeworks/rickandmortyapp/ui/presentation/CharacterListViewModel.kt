@@ -21,7 +21,7 @@ class CharacterListViewModel @Inject constructor(private val getPagedCharactersU
 
     private val characterListScope = CoroutineScope(Dispatchers.Main)
 
-    val pagedCharacterList: Flow<PagingData<CharacterDetail>> = Pager(
+    val getPagedCharacterList: Flow<PagingData<CharacterDetail>> = Pager(
         config = PagingConfig(pageSize = 25),
         initialKey = null,
         pagingSourceFactory = { CharacterListPagingSource(getPagedCharactersUseCase) }

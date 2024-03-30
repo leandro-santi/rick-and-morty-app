@@ -6,7 +6,11 @@ import com.solitudeworks.rickandmortyapp.R
 import com.solitudeworks.rickandmortyapp.RickAndMortyApplication
 import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
 
-class CharacterSearchListPagingSource(private val getPagedSearchCharactersUseCase: GetPagedSearchCharactersUseCase) :
+class CharacterSearchListPagingSource(
+    private val getPagedSearchCharactersUseCase: GetPagedSearchCharactersUseCase,
+    private val name: String,
+    private val status: String
+) :
     PagingSource<Int, CharacterDetail>() {
 
     override fun getRefreshKey(state: PagingState<Int, CharacterDetail>): Int =
@@ -17,7 +21,7 @@ class CharacterSearchListPagingSource(private val getPagedSearchCharactersUseCas
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterDetail> {
         val page = params.key ?: 1
         return kotlin.runCatching {
-            getPagedSearchCharactersUseCase.getPagedSearchCharacterList(page, "rick", "alive")
+            getPagedSearchCharactersUseCase.getPagedSearchCharacterList(page, name, status)
         }.fold(
             onSuccess = {
                 LoadResult.Page(

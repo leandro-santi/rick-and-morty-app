@@ -41,7 +41,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun CharacterList(navController: NavHostController) {
     val charactersViewModel = hiltViewModel<CharacterListViewModel>()
-    val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.pagedCharacterList
+    val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.getPagedCharacterList
     val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
 
     PaddingValues(top = 32.dp)

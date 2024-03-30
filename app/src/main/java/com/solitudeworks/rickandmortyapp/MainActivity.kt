@@ -90,9 +90,10 @@ fun RickAndMortyApp(
 
                     CharacterList(navController)
 
+                    // Search button
                     Button(
                         modifier = Modifier
-                            .align(Alignment.BottomCenter)
+                            .align(Alignment.BottomEnd)
                             .padding(8.dp),
                         onClick = {
                             navController.navigate(

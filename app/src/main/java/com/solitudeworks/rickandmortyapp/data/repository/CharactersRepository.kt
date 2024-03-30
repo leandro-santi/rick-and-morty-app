@@ -6,7 +6,7 @@ import com.solitudeworks.rickandmortyapp.data.response.CharacterList
 import retrofit2.Response
 import javax.inject.Inject
 
-class CharactersListRepository @Inject constructor() {
+class CharactersRepository @Inject constructor() {
 
     suspend fun getCharacterList(page: Int): Response<CharacterList> {
         return RetrofitInstance.CharacterApi.getPagedCharactersList(page)

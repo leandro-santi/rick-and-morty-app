@@ -105,7 +105,7 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
                 .crossfade(true)
                 .crossfade(1000)
                 .build(), contentDescription = null, modifier = Modifier
-                .size(100.dp, 100.dp), error = painterResource(id = R.drawable.no_internet)
+                .size(120.dp, 120.dp), error = painterResource(id = R.drawable.no_internet)
         )
 
         // Character's list entry details
@@ -134,9 +134,9 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
                 // Character's name
                 Text(
                     text = character.name ?: stringResource(id = R.string.text_unknown),
-                    fontSize = 16.sp,
+                    fontSize = 20.sp,
                     textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(start = 8.dp) // Adiciona padding entre o ícone e o texto
+                    modifier = Modifier.padding(start = 8.dp)
                 )
             }
 

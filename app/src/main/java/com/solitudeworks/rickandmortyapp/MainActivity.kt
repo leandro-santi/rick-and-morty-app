@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
+import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterSearchList
 import com.solitudeworks.rickandmortyapp.ui.presentation.SingleCharacter
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
@@ -128,7 +129,7 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
 
-                    // Search()
+                    CharacterSearchList(navController)
 
                 }
             }

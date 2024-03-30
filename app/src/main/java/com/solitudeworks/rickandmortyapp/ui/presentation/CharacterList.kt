@@ -8,12 +8,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,12 +32,15 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
 import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.utils.ErrorItem
+import com.solitudeworks.rickandmortyapp.utils.LoadingItem
+import com.solitudeworks.rickandmortyapp.utils.LoadingView
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun CharacterList(navController: NavHostController) {
-    val charactersViewModel = hiltViewModel<CharactersViewModel>()
+    val charactersViewModel = hiltViewModel<CharacterListViewModel>()
     val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.pagedCharacterList
     val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
 
@@ -203,52 +202,5 @@ fun CharacterItemPreview() {
             ), rememberNavController()
         )
 
-    }
-}
-
-@Composable
-fun LoadingView(
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
-fun LoadingItem() {
-    CircularProgressIndicator(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .wrapContentWidth(Alignment.CenterHorizontally)
-    )
-}
-
-@Composable
-fun ErrorItem(
-    message: String,
-    modifier: Modifier = Modifier,
-    onClickRetry: () -> Unit
-) {
-    Row(
-        modifier = modifier.padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = message,
-            maxLines = 1,
-            modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.headlineLarge,
-            color = Color.Red
-        )
-        OutlinedButton(onClick = onClickRetry) {
-            Text(text = "Try again")
-        }
     }
 }

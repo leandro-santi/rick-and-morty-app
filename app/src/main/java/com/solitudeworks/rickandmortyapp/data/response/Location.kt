@@ -1,11 +1,11 @@
-package com.solitudeworks.rickandmortyapp.data.model
+package com.solitudeworks.rickandmortyapp.data.response
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Location(
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("url")
-    val url: String
+    val url: String?
 )

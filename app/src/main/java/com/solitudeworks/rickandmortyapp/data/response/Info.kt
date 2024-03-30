@@ -1,15 +1,15 @@
-package com.solitudeworks.rickandmortyapp.data.model
+package com.solitudeworks.rickandmortyapp.data.response
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Info(
     @SerializedName("count")
-    val count: Int,
+    val count: Int?,
     @SerializedName("next")
-    val next: String,
+    val next: String?,
     @SerializedName("pages")
-    val pages: Int,
+    val pages: Int?,
     @SerializedName("prev")
-    val prev: Any
+    val prev: Any?
 )

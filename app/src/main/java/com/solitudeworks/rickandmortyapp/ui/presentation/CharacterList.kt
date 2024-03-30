@@ -45,7 +45,7 @@ fun CharacterList(navController: NavHostController) {
     val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.pagedCharacterList
     val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
 
-    PaddingValues(top = 64.dp)
+    PaddingValues(top = 32.dp)
     LazyColumn {
         items(lazyCharacters.itemCount) { index ->
             CharacterItem(lazyCharacters[index]!!, navController)
@@ -85,7 +85,9 @@ fun CharacterList(navController: NavHostController) {
 
 @Composable
 fun CharacterItem(character: CharacterDetail, navController: NavHostController) {
+
     val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .padding(all = 8.dp)
@@ -95,29 +97,27 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
             }, horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.Top
     ) {
+
+        // Character's image
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(character.image)
                 .crossfade(true)
                 .crossfade(1000)
                 .build(), contentDescription = null, modifier = Modifier
-                .size(200.dp, 200.dp), error = painterResource(id = R.drawable.no_internet)
+                .size(120.dp, 120.dp), error = painterResource(id = R.drawable.no_internet)
         )
+
+        // Character's list entry details
         Column(
-            modifier = Modifier
-                .padding(start = 16.dp),
+            modifier = Modifier.padding(start = 16.dp),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(
-                text = character.name ?: stringResource(id = R.string.text_unknown),
-                fontSize = 20.sp,
-                textAlign = TextAlign.Start
-            )
-            Row(
-                modifier = Modifier.padding(top = 30.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+
+                // Character's status feedback icon
                 Icon(
                     painter = painterResource(
                         id = when (character.status) {
@@ -126,16 +126,27 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
                             "unknown" -> R.drawable.ic_dot_grey
                             else -> R.drawable.ic_dot_grey
                         }
-                    ), contentDescription = null, tint = Color.Unspecified
+                    ),
+                    contentDescription = null,
+                    tint = Color.Unspecified
                 )
-                Text(text = "  ${character.status ?: ""} - ${character.species}")
+
+                // Character's name
+                Text(
+                    text = character.name ?: stringResource(id = R.string.text_unknown),
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
             }
 
-            Text(text = context.getString(R.string.text_last_known_location), color = Color.Gray)
-            // Text(text = character.characterLocation?.name ?: "")
-            Text(text = "")
+            // Character's details
+            Text(text = "Tap for details")
+
         }
+
     }
+
 }
 
 @Composable

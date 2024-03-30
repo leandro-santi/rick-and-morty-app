@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
+import com.solitudeworks.rickandmortyapp.ui.presentation.SingleCharacter
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint
@@ -89,9 +90,10 @@ fun RickAndMortyApp(
 
                     CharacterList(navController)
 
+                    // Search button
                     Button(
                         modifier = Modifier
-                            .align(Alignment.BottomCenter)
+                            .align(Alignment.BottomEnd)
                             .padding(8.dp),
                         onClick = {
                             navController.navigate(
@@ -102,17 +104,7 @@ fun RickAndMortyApp(
                     }
                 }
             }
-            composable(route = RickAndMortyScreenTitles.SearchList.name) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
 
-                    // LocationList()
-
-                }
-            }
             composable(route = RickAndMortyScreenTitles.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
                 val characterId =
                     navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
@@ -123,11 +115,24 @@ fun RickAndMortyApp(
                 ) {
                     characterId?.let {
 
-                        // SingleCharacter(characterId)
+                        SingleCharacter(characterId)
 
                     }
                 }
             }
+
+            composable(route = RickAndMortyScreenTitles.SearchList.name) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                ) {
+
+                    // Search()
+
+                }
+            }
+
         }
     }
 }

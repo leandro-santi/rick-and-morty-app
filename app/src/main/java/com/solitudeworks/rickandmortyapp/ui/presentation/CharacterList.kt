@@ -30,7 +30,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import com.solitudeworks.rickandmortyapp.utils.ErrorItem
 import com.solitudeworks.rickandmortyapp.utils.LoadingItem
 import com.solitudeworks.rickandmortyapp.utils.LoadingView

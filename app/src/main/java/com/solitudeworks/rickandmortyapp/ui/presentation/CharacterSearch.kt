@@ -24,7 +24,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import com.solitudeworks.rickandmortyapp.utils.ErrorItem
 import com.solitudeworks.rickandmortyapp.utils.LoadingItem
 import com.solitudeworks.rickandmortyapp.utils.LoadingView

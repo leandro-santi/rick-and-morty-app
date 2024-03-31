@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.solitudeworks.rickandmortyapp.data.domain.CharacterListPagingSource
 import com.solitudeworks.rickandmortyapp.data.domain.GetPagedCharactersUseCase
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

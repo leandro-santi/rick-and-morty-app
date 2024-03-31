@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.solitudeworks.rickandmortyapp.R
 import com.solitudeworks.rickandmortyapp.RickAndMortyApplication
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 
 class CharacterListPagingSource(private val getPagedCharactersUseCase: GetPagedCharactersUseCase) :
     PagingSource<Int, CharacterDetail>() {

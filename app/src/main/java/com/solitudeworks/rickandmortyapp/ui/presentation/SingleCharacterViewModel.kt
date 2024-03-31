@@ -2,7 +2,7 @@ package com.solitudeworks.rickandmortyapp.ui.presentation
 
 import androidx.lifecycle.ViewModel
 import com.solitudeworks.rickandmortyapp.data.domain.GetSingleCharactersUseCase
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import com.solitudeworks.rickandmortyapp.utils.LoadingState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

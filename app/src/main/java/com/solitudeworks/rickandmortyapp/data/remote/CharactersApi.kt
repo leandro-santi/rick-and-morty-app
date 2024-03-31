@@ -1,7 +1,7 @@
 package com.solitudeworks.rickandmortyapp.data.remote
 
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
-import com.solitudeworks.rickandmortyapp.data.response.CharacterList
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

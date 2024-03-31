@@ -55,16 +55,19 @@ fun ErrorItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         Text(
             text = message,
             maxLines = 1,
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.headlineLarge,
+            style = MaterialTheme.typography.headlineSmall,
             color = Color.Red
         )
+
         OutlinedButton(onClick = onClickRetry) {
-            Text(text = "Try again")
+            Text(text = "Try Again")
         }
+
     }
 
 }

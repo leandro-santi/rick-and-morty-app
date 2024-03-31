@@ -64,7 +64,7 @@ fun CharacterList(navController: NavHostController) {
                     val error = lazyCharacters.loadState.refresh as LoadState.Error
                     item {
                         ErrorItem(
-                            error.error.localizedMessage ?: "Unknown error",
+                            "Internet Error!",
                             onClickRetry = { retry() })
                     }
                 }
@@ -73,7 +73,7 @@ fun CharacterList(navController: NavHostController) {
                     val error = lazyCharacters.loadState.append as LoadState.Error
                     item {
                         ErrorItem(
-                            error.error.localizedMessage ?: "Unknown error",
+                            "Error!",
                             onClickRetry = { retry() })
                     }
                 }

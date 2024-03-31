@@ -29,9 +29,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
-import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterSearchScreen
-import com.solitudeworks.rickandmortyapp.ui.presentation.SingleCharacter
+import com.solitudeworks.rickandmortyapp.ui.presentation.screen.CharacterList
+import com.solitudeworks.rickandmortyapp.ui.presentation.screen.CharacterSearchScreen
+import com.solitudeworks.rickandmortyapp.ui.presentation.screen.SingleCharacter
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 import dagger.hilt.android.AndroidEntryPoint

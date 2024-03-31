@@ -1,4 +1,4 @@
-package com.solitudeworks.rickandmortyapp.ui.presentation
+package com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.solitudeworks.rickandmortyapp.data.domain.GetSingleCharactersUseCase

@@ -1,4 +1,4 @@
-package com.solitudeworks.rickandmortyapp.utils
+package com.solitudeworks.rickandmortyapp.ui.presentation.shared
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

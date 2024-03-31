@@ -25,7 +25,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
+import com.solitudeworks.rickandmortyapp.utils.ErrorItem
 import com.solitudeworks.rickandmortyapp.utils.LoadingState
+import com.solitudeworks.rickandmortyapp.utils.LoadingView
 
 @Composable
 fun SingleCharacter(characterId: Int) {
@@ -76,6 +78,7 @@ fun SingleCharacter(characterId: Int) {
             color = Color.Gray,
             modifier = Modifier.padding(top = 8.dp)
         )
+
         Row(
             modifier = Modifier
                 .padding(start = 16.dp),

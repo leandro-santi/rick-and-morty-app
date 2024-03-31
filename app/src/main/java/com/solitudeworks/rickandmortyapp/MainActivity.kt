@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterList
+import com.solitudeworks.rickandmortyapp.ui.presentation.CharacterSearchScreen
 import com.solitudeworks.rickandmortyapp.ui.presentation.SingleCharacter
 import com.solitudeworks.rickandmortyapp.ui.theme.RickAndMortyAppTheme
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
@@ -38,6 +39,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             RickAndMortyAppTheme {
@@ -54,12 +56,14 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
 
 @Composable
 fun RickAndMortyApp(
     navController: NavHostController = rememberNavController()
 ) {
+
     val backStackEntry by navController.currentBackStackEntryAsState()
     val characterName = backStackEntry?.arguments?.getString("characterName", null)
     val currentScreenName = characterName ?: stringResource(
@@ -81,6 +85,8 @@ fun RickAndMortyApp(
             navController = navController,
             startDestination = RickAndMortyScreenTitles.CharacterList.name
         ) {
+
+            // Character's List Entry
             composable(route = RickAndMortyScreenTitles.CharacterList.name) {
                 Box(
                     modifier = Modifier
@@ -88,7 +94,7 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
 
-                    CharacterList(navController)
+                    CharacterList(navController) // Character List Compose Layout
 
                     // Search button
                     Button(
@@ -105,6 +111,7 @@ fun RickAndMortyApp(
                 }
             }
 
+            // Character's Details
             composable(route = RickAndMortyScreenTitles.SingleCharacter.name + "/{characterId}/{characterName}") { navBackStackEntry ->
                 val characterId =
                     navBackStackEntry.arguments?.getString("characterId")?.toIntOrNull()
@@ -115,12 +122,13 @@ fun RickAndMortyApp(
                 ) {
                     characterId?.let {
 
-                        SingleCharacter(characterId)
+                        SingleCharacter(characterId) // Character Detail Compose Layout
 
                     }
                 }
             }
 
+            // Character's Search
             composable(route = RickAndMortyScreenTitles.SearchList.name) {
                 Box(
                     modifier = Modifier
@@ -128,23 +136,25 @@ fun RickAndMortyApp(
                         .padding(innerPadding)
                 ) {
 
-                    // Search()
+                    CharacterSearchScreen(navController) // Character Search Compose Layout
 
                 }
             }
 
         }
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RickAndMortyAppBar(
+fun RickAndMortyAppBar( // Application Bar with title
     currentScreenTitle: String,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
     TopAppBar(
         title = { Text(currentScreenTitle) },
         colors = TopAppBarDefaults.mediumTopAppBarColors(
@@ -162,5 +172,5 @@ fun RickAndMortyAppBar(
             }
         }
     )
-}
 
+}

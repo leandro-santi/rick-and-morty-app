@@ -4,12 +4,16 @@ import com.solitudeworks.rickandmortyapp.data.repository.CharactersRepository
 import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
 import javax.inject.Inject
 
-class GetPagedCharactersUseCase @Inject constructor(
+class GetPagedSearchCharactersUseCase @Inject constructor(
     private val charactersListRepository: CharactersRepository
 ) {
 
-    suspend fun getPagedCharacterList(page: Int): List<CharacterDetail> {
-        return charactersListRepository.getCharacterList(page).body()?.results
+    suspend fun getPagedSearchCharacterList(
+        page: Int,
+        name: String,
+        status: String
+    ): List<CharacterDetail> {
+        return charactersListRepository.getSearchCharacterList(page, name, status).body()?.results
             ?: emptyList<CharacterDetail>()
     }
 

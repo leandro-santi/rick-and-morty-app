@@ -1,6 +1,5 @@
 package com.solitudeworks.rickandmortyapp.data.response
 
-
 import com.google.gson.annotations.SerializedName
 
 data class CharacterList(

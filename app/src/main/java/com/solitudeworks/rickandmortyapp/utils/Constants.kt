@@ -4,7 +4,7 @@ class Constants {
 
     companion object {
 
-        val BASE_URL = "https://rickandmortyapi.com/api/"
+        const val BASE_URL = "https://rickandmortyapi.com/api/"
 
     }
 

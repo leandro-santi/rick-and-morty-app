@@ -1,7 +1,7 @@
 package com.solitudeworks.rickandmortyapp.data.domain
 
 import com.solitudeworks.rickandmortyapp.data.repository.CharactersRepository
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import javax.inject.Inject
 
 class GetPagedCharactersUseCase @Inject constructor(

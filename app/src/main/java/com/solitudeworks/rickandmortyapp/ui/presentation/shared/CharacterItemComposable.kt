@@ -1,14 +1,12 @@
-package com.solitudeworks.rickandmortyapp.ui.presentation
+package com.solitudeworks.rickandmortyapp.ui.presentation.shared
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,67 +19,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.paging.LoadState
-import androidx.paging.PagingData
-import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
-import com.solitudeworks.rickandmortyapp.utils.ErrorItem
-import com.solitudeworks.rickandmortyapp.utils.LoadingItem
-import com.solitudeworks.rickandmortyapp.utils.LoadingView
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
-import kotlinx.coroutines.flow.Flow
-
-@Composable
-fun CharacterList(navController: NavHostController) {
-
-    val charactersViewModel = hiltViewModel<CharacterListViewModel>()
-    val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.getPagedCharacterList
-    val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
-
-    PaddingValues(top = 32.dp)
-    LazyColumn {
-        items(lazyCharacters.itemCount) { index ->
-            CharacterItem(lazyCharacters[index]!!, navController)
-        }
-
-        lazyCharacters.apply {
-            when {
-                loadState.refresh is LoadState.Loading -> {
-                    item { LoadingView(modifier = Modifier.fillParentMaxSize()) }
-                }
-
-                loadState.append is LoadState.Loading -> {
-                    item { LoadingItem() }
-                }
-
-                loadState.refresh is LoadState.Error -> {
-                    val error = lazyCharacters.loadState.refresh as LoadState.Error
-                    item {
-                        ErrorItem(
-                            "Internet Error!",
-                            onClickRetry = { retry() })
-                    }
-                }
-
-                loadState.append is LoadState.Error -> {
-                    val error = lazyCharacters.loadState.append as LoadState.Error
-                    item {
-                        ErrorItem(
-                            "Error!",
-                            onClickRetry = { retry() })
-                    }
-                }
-            }
-        }
-    }
-
-}
 
 @Composable
 fun CharacterItem(character: CharacterDetail, navController: NavHostController) {

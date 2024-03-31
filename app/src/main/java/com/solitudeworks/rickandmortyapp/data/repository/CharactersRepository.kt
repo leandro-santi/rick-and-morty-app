@@ -1,8 +1,8 @@
 package com.solitudeworks.rickandmortyapp.data.repository
 
 import com.solitudeworks.rickandmortyapp.data.remote.RetrofitInstance
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
-import com.solitudeworks.rickandmortyapp.data.response.CharacterList
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterList
 import retrofit2.Response
 import javax.inject.Inject
 

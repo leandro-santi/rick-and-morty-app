@@ -1,4 +1,4 @@
-package com.solitudeworks.rickandmortyapp.ui.presentation
+package com.solitudeworks.rickandmortyapp.ui.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,9 +25,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
-import com.solitudeworks.rickandmortyapp.utils.ErrorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.ErrorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingView
+import com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel.SingleCharacterViewModel
 import com.solitudeworks.rickandmortyapp.utils.LoadingState
-import com.solitudeworks.rickandmortyapp.utils.LoadingView
 
 @Composable
 fun SingleCharacter(characterId: Int) {

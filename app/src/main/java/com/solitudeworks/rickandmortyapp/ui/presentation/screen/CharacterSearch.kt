@@ -1,4 +1,4 @@
-package com.solitudeworks.rickandmortyapp.ui.presentation
+package com.solitudeworks.rickandmortyapp.ui.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,10 +24,12 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
-import com.solitudeworks.rickandmortyapp.utils.ErrorItem
-import com.solitudeworks.rickandmortyapp.utils.LoadingItem
-import com.solitudeworks.rickandmortyapp.utils.LoadingView
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.CharacterItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.ErrorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingView
+import com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel.CharacterSearchViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable

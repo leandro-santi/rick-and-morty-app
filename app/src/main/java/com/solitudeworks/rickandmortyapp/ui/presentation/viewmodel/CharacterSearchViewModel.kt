@@ -1,4 +1,4 @@
-package com.solitudeworks.rickandmortyapp.ui.presentation
+package com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.solitudeworks.rickandmortyapp.data.domain.CharacterSearchListPagingSource
 import com.solitudeworks.rickandmortyapp.data.domain.GetPagedSearchCharactersUseCase
-import com.solitudeworks.rickandmortyapp.data.response.CharacterDetail
+import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

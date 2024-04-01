@@ -14,45 +14,46 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SingleCharacterViewModel @Inject constructor(
-    private val getSingleCharactersUseCase: GetSingleCharactersUseCase
-) : ViewModel() {
+class SingleCharacterViewModel
+    @Inject
+    constructor(
+        private val getSingleCharactersUseCase: GetSingleCharactersUseCase,
+    ) : ViewModel() {
+        private val _loadingState = MutableStateFlow<LoadingState>(LoadingState.Loading)
+        val loadingState = _loadingState.asStateFlow()
 
-    private val _loadingState = MutableStateFlow<LoadingState>(LoadingState.Loading)
-    val loadingState = _loadingState.asStateFlow()
+        private val _singleCharacter =
+            MutableStateFlow(
+                CharacterDetail(
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                ),
+            )
+        var singleCharacter: StateFlow<CharacterDetail> = _singleCharacter.asStateFlow()
 
-    private val _singleCharacter = MutableStateFlow(
-        CharacterDetail(
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        )
-    )
-    var singleCharacter: StateFlow<CharacterDetail> = _singleCharacter.asStateFlow()
+        var characterId: Int = 0
 
-    var characterId: Int = 0
+        private val dBScope = CoroutineScope(Dispatchers.IO)
 
-    private val dBScope = CoroutineScope(Dispatchers.IO)
-
-    fun getSingleCharacter() {
-        _loadingState.value = LoadingState.Loading
-        dBScope.launch {
-            try {
-                _singleCharacter.value = getSingleCharactersUseCase.getSingleCharacter(characterId)
-                _loadingState.value = LoadingState.Ready
-            } catch (e: Exception) {
-                _loadingState.value = LoadingState.Error(e)
+        fun getSingleCharacter() {
+            _loadingState.value = LoadingState.Loading
+            dBScope.launch {
+                try {
+                    _singleCharacter.value = getSingleCharactersUseCase.getSingleCharacterUseCase(characterId)
+                    _loadingState.value = LoadingState.Ready
+                } catch (e: Exception) {
+                    _loadingState.value = LoadingState.Error(e)
+                }
             }
         }
     }
-
-}

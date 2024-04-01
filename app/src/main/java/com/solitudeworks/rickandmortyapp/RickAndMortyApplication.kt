@@ -6,7 +6,6 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class RickAndMortyApplication : Application() {
-
     init {
         instance = this
     }
@@ -23,5 +22,4 @@ class RickAndMortyApplication : Application() {
         super.onCreate()
         val context: Context = RickAndMortyApplication.applicationContext()
     }
-
 }

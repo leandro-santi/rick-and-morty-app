@@ -15,5 +15,5 @@ data class CharacterDetail(
     val species: String?,
     val status: String?,
     val type: String?,
-    val url: String?
+    val url: String?,
 )

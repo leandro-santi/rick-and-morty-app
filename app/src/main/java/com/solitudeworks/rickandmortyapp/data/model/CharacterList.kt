@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CharacterList(
     val info: Info?,
-    val results: List<CharacterDetail>?
+    val results: List<CharacterDetail>?,
 )

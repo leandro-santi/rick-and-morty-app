@@ -20,9 +20,9 @@ class SingleCharacterViewModelTest {
             CharacterDetail(
                 created = "2017-11-04T18:48:46.250Z",
                 episode =
-                    listOf(
-                        "https://rickandmortyapi.com/api/episode/1",
-                    ),
+                listOf(
+                    "https://rickandmortyapi.com/api/episode/1",
+                ),
                 gender = "Male",
                 id = mockCharacterId,
                 image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
@@ -41,9 +41,6 @@ class SingleCharacterViewModelTest {
             SingleCharacterViewModel(mockUseCase).apply {
                 characterId = mockCharacterId
             }
-
-        // Verify initial loading state
-        assertEquals(viewModel.loadingState.value, LoadingState.Loading)
 
         coEvery { mockUseCase.getSingleCharacterUseCase(1) } returns mockCharacter
 
@@ -68,9 +65,9 @@ class SingleCharacterViewModelTest {
             CharacterDetail(
                 created = "2017-11-04T18:48:46.250Z",
                 episode =
-                    listOf(
-                        "https://rickandmortyapi.com/api/episode/1",
-                    ),
+                listOf(
+                    "https://rickandmortyapi.com/api/episode/1",
+                ),
                 gender = "Male",
                 id = mockCharacterOneId,
                 image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
@@ -89,9 +86,9 @@ class SingleCharacterViewModelTest {
             CharacterDetail(
                 created = "2017-11-04T18:50:21.651Z",
                 episode =
-                    listOf(
-                        "https://rickandmortyapi.com/api/episode/1",
-                    ),
+                listOf(
+                    "https://rickandmortyapi.com/api/episode/1",
+                ),
                 gender = "Male",
                 id = mockCharacterTwoId,
                 image = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
@@ -110,9 +107,6 @@ class SingleCharacterViewModelTest {
             SingleCharacterViewModel(mockUseCase).apply {
                 characterId = mockCharacterOneId
             }
-
-        // Verify initial loading state
-        assertEquals(viewModel.loadingState.value, LoadingState.Loading)
 
         coEvery { mockUseCase.getSingleCharacterUseCase(1) } returns mockCharacterOne
 

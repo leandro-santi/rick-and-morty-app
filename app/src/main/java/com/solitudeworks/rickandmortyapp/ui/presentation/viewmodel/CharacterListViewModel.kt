@@ -14,13 +14,14 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class CharacterListViewModel @Inject constructor(private val getPagedCharactersUseCase: GetPagedCharactersUseCase) :
+class CharacterListViewModel
+    @Inject
+    constructor(private val getPagedCharactersUseCase: GetPagedCharactersUseCase) :
     ViewModel() {
-
-    val getPagedCharacterList: Flow<PagingData<CharacterDetail>> = Pager(
-        config = PagingConfig(pageSize = 25),
-        initialKey = null,
-        pagingSourceFactory = { CharacterListPagingSource(getPagedCharactersUseCase) }
-    ).flow.cachedIn(viewModelScope)
-
-}
+        val getPagedCharacterList: Flow<PagingData<CharacterDetail>> =
+            Pager(
+                config = PagingConfig(pageSize = 25),
+                initialKey = null,
+                pagingSourceFactory = { CharacterListPagingSource(getPagedCharactersUseCase) },
+            ).flow.cachedIn(viewModelScope)
+    }

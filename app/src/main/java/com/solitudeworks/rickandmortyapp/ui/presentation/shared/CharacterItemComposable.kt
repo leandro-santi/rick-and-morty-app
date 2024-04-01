@@ -27,49 +27,57 @@ import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 import com.solitudeworks.rickandmortyapp.utils.RickAndMortyScreenTitles
 
 @Composable
-fun CharacterItem(character: CharacterDetail, navController: NavHostController) {
-
+fun characterItem(
+    character: CharacterDetail,
+    navController: NavHostController,
+) {
     Row(
-        modifier = Modifier
-            .padding(all = 8.dp)
-            .fillMaxWidth()
-            .clickable {
-                navController.navigate(RickAndMortyScreenTitles.SingleCharacter.name + "/${character.id}/${character.name}")
-            }, horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.Top
+        modifier =
+            Modifier
+                .padding(all = 8.dp)
+                .fillMaxWidth()
+                .clickable {
+                    navController.navigate(RickAndMortyScreenTitles.SingleCharacter.name + "/${character.id}/${character.name}")
+                },
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.Top,
     ) {
-
         // Character's image
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(character.image)
-                .crossfade(true)
-                .crossfade(1000)
-                .build(), contentDescription = null, modifier = Modifier
-                .size(120.dp, 120.dp), error = painterResource(id = R.drawable.no_internet)
+            model =
+                ImageRequest.Builder(LocalContext.current)
+                    .data(character.image)
+                    .crossfade(true)
+                    .crossfade(1000)
+                    .build(),
+            contentDescription = null,
+            modifier =
+                Modifier
+                    .size(120.dp, 120.dp),
+            error = painterResource(id = R.drawable.no_internet),
         )
 
         // Character's list entry details
         Column(
             modifier = Modifier.padding(start = 16.dp),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
-
             Row(verticalAlignment = Alignment.CenterVertically) {
-
                 // Character's status feedback icon
                 Icon(
-                    painter = painterResource(
-                        id = when (character.status) {
-                            "Alive" -> R.drawable.ic_dot_green
-                            "Dead" -> R.drawable.ic_dot_red
-                            "unknown" -> R.drawable.ic_dot_grey
-                            else -> R.drawable.ic_dot_grey
-                        }
-                    ),
+                    painter =
+                        painterResource(
+                            id =
+                                when (character.status) {
+                                    "Alive" -> R.drawable.ic_dot_green
+                                    "Dead" -> R.drawable.ic_dot_red
+                                    "unknown" -> R.drawable.ic_dot_grey
+                                    else -> R.drawable.ic_dot_grey
+                                },
+                        ),
                     contentDescription = null,
-                    tint = Color.Unspecified
+                    tint = Color.Unspecified,
                 )
 
                 // Character's name
@@ -77,15 +85,12 @@ fun CharacterItem(character: CharacterDetail, navController: NavHostController) 
                     text = character.name ?: stringResource(id = R.string.text_unknown),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(start = 8.dp)
+                    modifier = Modifier.padding(start = 8.dp),
                 )
             }
 
             // Character's details
             Text(text = "Tap for details")
-
         }
-
     }
-
 }

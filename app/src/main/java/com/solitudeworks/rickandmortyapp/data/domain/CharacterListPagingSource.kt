@@ -8,10 +8,9 @@ import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
 
 class CharacterListPagingSource(private val getPagedCharactersUseCase: GetPagedCharactersUseCase) :
     PagingSource<Int, CharacterDetail>() {
-
     override fun getRefreshKey(state: PagingState<Int, CharacterDetail>): Int =
         RickAndMortyApplication.applicationContext().getString(
-            R.string.first_page
+            R.string.first_page,
         ).toInt()
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CharacterDetail> {
@@ -23,11 +22,10 @@ class CharacterListPagingSource(private val getPagedCharactersUseCase: GetPagedC
                 LoadResult.Page(
                     data = it,
                     prevKey = null,
-                    nextKey = if (it.isEmpty()) null else page + 1
+                    nextKey = if (it.isEmpty()) null else page + 1,
                 )
             },
-            onFailure = { LoadResult.Error(it) }
+            onFailure = { LoadResult.Error(it) },
         )
     }
-
 }

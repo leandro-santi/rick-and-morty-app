@@ -25,13 +25,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.solitudeworks.rickandmortyapp.R
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.ErrorItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingView
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.errorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.loadingView
 import com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel.SingleCharacterViewModel
 import com.solitudeworks.rickandmortyapp.utils.LoadingState
 
 @Composable
-fun SingleCharacter(characterId: Int) {
+fun singleCharacter(characterId: Int) {
     val singleCharacterViewModel: SingleCharacterViewModel =
         hiltViewModel<SingleCharacterViewModel>()
     if (singleCharacterViewModel.characterId == 0) {
@@ -41,35 +41,36 @@ fun SingleCharacter(characterId: Int) {
     val character by singleCharacterViewModel.singleCharacter.collectAsState()
 
     Column(
-        modifier = Modifier
-            .padding(all = 8.dp)
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth(),
+        modifier =
+            Modifier
+                .padding(all = 8.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
-
-        ) {
-
+    ) {
         // Character's image
         AsyncImage(
-            model = ImageRequest
-                .Builder(LocalContext.current)
-                .data(character.image)
-                .crossfade(true)
-                .crossfade(1000)
-                .build(),
+            model =
+                ImageRequest
+                    .Builder(LocalContext.current)
+                    .data(character.image)
+                    .crossfade(true)
+                    .crossfade(1000)
+                    .build(),
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .fillMaxSize(),
             error = painterResource(id = R.drawable.no_internet),
-            contentScale = ContentScale.FillWidth
+            contentScale = ContentScale.FillWidth,
         )
 
         // Character's name
         Text(
             text = stringResource(R.string.text_character),
             color = Color.Gray,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
         Text(text = "${character.name}")
 
@@ -77,36 +78,39 @@ fun SingleCharacter(characterId: Int) {
         Text(
             text = stringResource(id = R.string.text_status),
             color = Color.Gray,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
 
         Row(
-            modifier = Modifier
-                .padding(start = 16.dp),
+            modifier =
+                Modifier
+                    .padding(start = 16.dp),
             horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-
             Icon(
-                painter = painterResource(
-                    id = when (character.status) {
-                        "Alive" -> R.drawable.ic_dot_green
-                        "Dead" -> R.drawable.ic_dot_red
-                        "unknown" -> R.drawable.ic_dot_grey
-                        else -> R.drawable.ic_dot_grey
-                    }
-                ), contentDescription = null, tint = Color.Unspecified
+                painter =
+                    painterResource(
+                        id =
+                            when (character.status) {
+                                "Alive" -> R.drawable.ic_dot_green
+                                "Dead" -> R.drawable.ic_dot_red
+                                "unknown" -> R.drawable.ic_dot_grey
+                                else -> R.drawable.ic_dot_grey
+                            },
+                    ),
+                contentDescription = null,
+                tint = Color.Unspecified,
             )
 
             Text(text = "  ${character.status ?: ""} ")
-
         }
 
         // Character's specie and gender
         Text(
             text = stringResource(id = R.string.text_species_and_gender),
             color = Color.Gray,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
         Text(text = "${character.species} / ${character.gender}")
 
@@ -114,27 +118,26 @@ fun SingleCharacter(characterId: Int) {
         Text(
             text = stringResource(R.string.text_last_known_location),
             color = Color.Gray,
-            modifier = Modifier.padding(top = 8.dp)
+            modifier = Modifier.padding(top = 8.dp),
         )
         Text(text = character.location?.name ?: "")
-
     }
 
     val loadingState by singleCharacterViewModel.loadingState.collectAsState()
 
     when (loadingState) {
         is LoadingState.Loading -> {
-            LoadingView(modifier = Modifier.fillMaxSize())
+            loadingView(modifier = Modifier.fillMaxSize())
         }
 
         is LoadingState.Ready -> {
         }
 
         is LoadingState.Error -> {
-            ErrorItem(
+            errorItem(
                 (loadingState as LoadingState.Error).exception.localizedMessage ?: "Unknown error",
-                onClickRetry = { singleCharacterViewModel.getSingleCharacter() })
+                onClickRetry = { singleCharacterViewModel.getSingleCharacter() },
+            )
         }
     }
-
 }

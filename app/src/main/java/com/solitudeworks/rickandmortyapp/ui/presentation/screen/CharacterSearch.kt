@@ -25,36 +25,36 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.CharacterItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.ErrorItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingView
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.characterItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.errorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.loadingItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.loadingView
 import com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel.CharacterSearchViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun CharacterSearchScreen(navController: NavHostController) {
-
+fun characterSearchScreen(navController: NavHostController) {
     var showSearchList by remember { mutableStateOf(false) }
     var name by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         // Name text field
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
             label = { Text("Name") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
         )
 
         // Status text field
@@ -62,29 +62,32 @@ fun CharacterSearchScreen(navController: NavHostController) {
             value = status,
             onValueChange = { status = it },
             label = { Text("Status") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
         )
 
         // Search button
         Button(
             onClick = { showSearchList = true },
-            modifier = Modifier.padding(top = 16.dp, bottom = 32.dp)
+            modifier = Modifier.padding(top = 16.dp, bottom = 32.dp),
         ) {
             Text(text = "Search!")
         }
 
         if (showSearchList) {
-            CharacterSearchList(navController, name, status)
+            characterSearchList(navController, name, status)
         }
     }
-
 }
 
 @Composable
-fun CharacterSearchList(navController: NavHostController, name: String, filter: String) {
-
+fun characterSearchList(
+    navController: NavHostController,
+    name: String,
+    filter: String,
+) {
     val charactersSearchViewModel = hiltViewModel<CharacterSearchViewModel>()
     val characterFlow: Flow<PagingData<CharacterDetail>> =
         charactersSearchViewModel.getPagedSearchCharacterList(name, filter)
@@ -93,38 +96,39 @@ fun CharacterSearchList(navController: NavHostController, name: String, filter: 
     PaddingValues(top = 32.dp)
     LazyColumn {
         items(lazyCharacters.itemCount) { index ->
-            CharacterItem(lazyCharacters[index]!!, navController)
+            characterItem(lazyCharacters[index]!!, navController)
         }
 
         lazyCharacters.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
-                    item { LoadingView(modifier = Modifier.fillParentMaxSize()) }
+                    item { loadingView(modifier = Modifier.fillParentMaxSize()) }
                 }
 
                 loadState.append is LoadState.Loading -> {
-                    item { LoadingItem() }
+                    item { loadingItem() }
                 }
 
                 loadState.refresh is LoadState.Error -> {
                     val error = lazyCharacters.loadState.refresh as LoadState.Error
                     item {
-                        ErrorItem(
+                        errorItem(
                             "Internet Error!",
-                            onClickRetry = { retry() })
+                            onClickRetry = { retry() },
+                        )
                     }
                 }
 
                 loadState.append is LoadState.Error -> {
                     val error = lazyCharacters.loadState.append as LoadState.Error
                     item {
-                        ErrorItem(
+                        errorItem(
                             "Error!",
-                            onClickRetry = { retry() })
+                            onClickRetry = { retry() },
+                        )
                     }
                 }
             }
         }
     }
-
 }

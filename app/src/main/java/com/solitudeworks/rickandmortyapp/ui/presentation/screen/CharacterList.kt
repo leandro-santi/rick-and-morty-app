@@ -12,16 +12,15 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.solitudeworks.rickandmortyapp.data.model.CharacterDetail
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.CharacterItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.ErrorItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingItem
-import com.solitudeworks.rickandmortyapp.ui.presentation.shared.LoadingView
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.characterItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.errorItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.loadingItem
+import com.solitudeworks.rickandmortyapp.ui.presentation.shared.loadingView
 import com.solitudeworks.rickandmortyapp.ui.presentation.viewmodel.CharacterListViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Composable
-fun CharacterList(navController: NavHostController) {
-
+fun characterList(navController: NavHostController) {
     val charactersViewModel = hiltViewModel<CharacterListViewModel>()
     val characterFlow: Flow<PagingData<CharacterDetail>> = charactersViewModel.getPagedCharacterList
     val lazyCharacters: LazyPagingItems<CharacterDetail> = characterFlow.collectAsLazyPagingItems()
@@ -29,38 +28,39 @@ fun CharacterList(navController: NavHostController) {
     PaddingValues(top = 32.dp)
     LazyColumn {
         items(lazyCharacters.itemCount) { index ->
-            CharacterItem(lazyCharacters[index]!!, navController)
+            characterItem(lazyCharacters[index]!!, navController)
         }
 
         lazyCharacters.apply {
             when {
                 loadState.refresh is LoadState.Loading -> {
-                    item { LoadingView(modifier = Modifier.fillParentMaxSize()) }
+                    item { loadingView(modifier = Modifier.fillParentMaxSize()) }
                 }
 
                 loadState.append is LoadState.Loading -> {
-                    item { LoadingItem() }
+                    item { loadingItem() }
                 }
 
                 loadState.refresh is LoadState.Error -> {
                     val error = lazyCharacters.loadState.refresh as LoadState.Error
                     item {
-                        ErrorItem(
+                        errorItem(
                             "Internet Error!",
-                            onClickRetry = { retry() })
+                            onClickRetry = { retry() },
+                        )
                     }
                 }
 
                 loadState.append is LoadState.Error -> {
                     val error = lazyCharacters.loadState.append as LoadState.Error
                     item {
-                        ErrorItem(
+                        errorItem(
                             "Error!",
-                            onClickRetry = { retry() })
+                            onClickRetry = { retry() },
+                        )
                     }
                 }
             }
         }
     }
-
 }

@@ -12,7 +12,7 @@ This app is about listing and searching for characters from the show. It include
 
 - A character list with initial details.
 - A character detail screen with some information.
-- A character search screen with text filters.
+- A character search screen with filters.
 
 ## Development
 

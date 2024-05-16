@@ -17,7 +17,6 @@ This app is about listing and searching for characters from the show. It include
 ## Development
 
 - Android
-- Android Studio
 - Kotlin
 - Jetpack Compose
 - Coroutines
